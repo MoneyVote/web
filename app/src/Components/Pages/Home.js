@@ -17,9 +17,9 @@ function Home(props) {
                             <HeaderBar/>
                         </Box>
                     </Box>
-                    <BettingCard {...props} img={Arlo}/>
                 </Box>
             </React.Fragment>
+            <BettingCard {...props} image={Arlo}/>
         </>
     )
 }
