@@ -25,9 +25,7 @@ const LoadApp = (props) =>
 {
     const {enqueueSnackbar} = useSnackbar();
     const produceSnackBar = (message, variant = "error") => enqueueSnackbar(message, {variant: variant});
-
-
-
+    
     return (
         <BrowserRouter>
             <Router {...props} produceSnackBar={produceSnackBar}/>
@@ -36,7 +34,7 @@ const LoadApp = (props) =>
 };
 
 
-function App(props) {
+function App() {
 
     const theme = createMuiTheme({ palette: {
             primary: {main: '#488DB7' },
@@ -44,17 +42,12 @@ function App(props) {
 
 
     let [MVInfo, setMVInfo] = useState(null)
-
     useEffect(()=> {
-        let MVdata = Promise.resolve(initBlockchain())
+        Promise.resolve(initBlockchain())
             .then(function (result){
                 console.log("result",result.userAddress);
                 setMVInfo(result);
     })}, []);
-
-    console.log("MVINFO",MVInfo)
-
-
 
     return (
         <ThemeProvider theme={theme}>

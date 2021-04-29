@@ -1,16 +1,16 @@
 // import store from "../redux/store";
-import { ethers } from "ethers";
+import {ethers} from "ethers";
 
 export const BLOCKCHAIN_INITIALIZED = "BLOCKCHAIN_INITIALIZED"; // action type
 
 // action creators (dispatch sends this to redux reducer)
 
-function blockchainInitialized(data) {
-    return {
-        type: BLOCKCHAIN_INITIALIZED,
-        payload: data
-    };
-}
+// function blockchainInitialized(data) {
+//     return {
+//         type: BLOCKCHAIN_INITIALIZED,
+//         payload: data
+//         };
+//     }
 
 //  set up provider, signer and contract instance
 
@@ -45,10 +45,11 @@ const initBlockchain = async () => {
     // MV = new ethers.Contract("TODO ********* MoneyVote contract address here ***********", abi, signer)
 
     // put state data into the REDUX store for easy access from other pages and components
+
     // let data = {provider, signer, MV, userAddress} // ***** real one ****
-    let data = {userAddress} // temp just tp play with the user address
+
     // store.dispatch(blockchainInitialized(data))
-    return data;
+    return {provider, signer, userAddress}; // temp just tp play with the user address
 }
 
 export default initBlockchain;
