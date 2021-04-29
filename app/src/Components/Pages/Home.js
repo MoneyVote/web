@@ -1,8 +1,6 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {Box, Grid, Typography} from "@material-ui/core";
-import CountdownTimer from "../Utils/CountdownTimer";
 import Header from "../Margins/Header";
-import Footer from "../Margins/Footer";
 import BettingCard from "../Cards/BettingCard";
 import Arlo from "../Static/arlo.jpg"
 
@@ -10,17 +8,27 @@ function Home(props) {
     return (
         <>
             <Header/>
-            <React.Fragment>
-                <Box width={"100vw"} height={"100vh"} style={{scrollBehavior: "smooth"}}>
-                    <Box width={"100%"} height={"100%"} style={{}}>
-                        <Box minHeight={400} display={"flex"} flexDirection={"column"} bgcolor={"primary.main"}>
-                            <HeaderBar/>
-                        </Box>
-                    </Box>
-                </Box>
-            </React.Fragment>
-            <BettingCard {...props} image={Arlo}/>
+            <Box minHeight={400} display={"flex"} flexDirection={"column"} bgcolor={"primary.main"}>
+                <HeaderBar/>
+            </Box>
+            <Box border={1} m={2}>
+                <CardFormat {...props} image={Arlo}/>
+            </Box>
         </>
+    )
+}
+
+function CardFormat(props) {
+    return (
+        <Grid container
+              spacing={0}
+              align="center"
+              justify="center"
+              direction="column">
+            <Box p={5}>
+                <BettingCard {...props} image={props.image}/>
+            </Box>
+        </Grid>
     )
 }
 

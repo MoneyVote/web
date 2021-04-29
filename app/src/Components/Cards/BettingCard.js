@@ -15,15 +15,17 @@ function BettingCard(props) {
     const classes = useStyles();
 
     return (
-        <Card className={classes.root}>
-            <CardActionArea>
-                <CardMedia
-                    className={classes.media}
-                    image={props.image}
-                    title='candidate-image'
-                />
-            </CardActionArea>
-        </Card>
+        <Grid item>
+            <Card className={classes.root}>
+                <CardActionArea>
+                    <CardMedia
+                        className={classes.media}
+                        image={props.image}
+                        title='candidate-image'
+                    />
+                </CardActionArea>
+            </Card>
+        </Grid>
     )
 
 
