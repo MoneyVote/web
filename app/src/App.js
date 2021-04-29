@@ -25,7 +25,7 @@ const LoadApp = (props) =>
 {
     const {enqueueSnackbar} = useSnackbar();
     const produceSnackBar = (message, variant = "error") => enqueueSnackbar(message, {variant: variant});
-    
+
     return (
         <BrowserRouter>
             <Router {...props} produceSnackBar={produceSnackBar}/>
