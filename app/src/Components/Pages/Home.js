@@ -7,9 +7,10 @@ import BettingCard from "../Cards/BettingCard";
 import Arlo from "../Static/arlo.jpg"
 
 function Home(props) {
+    console.log("Home",props)
     return (
         <>
-            <Header/>
+            <Header {...props}/>
             <React.Fragment>
                 <Box width={"100vw"} height={"100vh"} style={{scrollBehavior: "smooth"}}>
                     <Box width={"100%"} height={"100%"} style={{}}>
