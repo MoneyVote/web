@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../Static/logo.png"
+import Logo from "../Static/Images/logo.png"
 import {Box, IconButton, Grid, Typography, Avatar} from "@material-ui/core";
 
 function Header() {
