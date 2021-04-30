@@ -1,30 +1,18 @@
 import React, {useState} from 'react'
-import {
-    Box,
-    FormControl,
-    Grid,
-    InputAdornment,
-    InputLabel,
-    makeStyles,
-    OutlinedInput,
-    Typography
-} from "@material-ui/core";
+import {Box, FormControl, Grid, InputAdornment, InputLabel, makeStyles, OutlinedInput, Typography} from "@material-ui/core";
 import Header from "../Margins/Header";
-import BettingCard from "../Cards/BettingCard";
-import Arlo from "../Static/arlo.jpg";
-import Maizee from "../Static/maizee.jpg";
-import Razmataz from "../Static/razzy.jpg";
-import Tim from "../Static/tim.png";
+import BettingCard from "../Components/BettingCard";
+import Arlo from "../Static/Images/arlo.jpg";
+import Maizee from "../Static/Images/maizee.jpg";
+import Razmataz from "../Static/Images/razzy.jpg";
+import Tim from "../Static/Images/tim.png";
+import HowToVoteIcon from '@material-ui/icons/HowToVote';
+import Button from "@material-ui/core/Button";
+import {Row} from "@mui-treasury/components/flex";
+import {useStyles} from "../Static/Constants";
+import BetInputBox from '../Components/BetInputBox';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    margin: {
-        margin: theme.spacing(1),
-    }
-}));
+import CountdownTimer from "../Components/CountdownTimer";
 
 function Home(props) {
     console.log("Home",props)
@@ -32,7 +20,7 @@ function Home(props) {
     const [value, setValue] = useState({amount: ''});
     return (
         <>
-            <Header {...props}/>
+        <Header {...props}/>
             <Box minHeight={400} display={"flex"} flexDirection={"column"} bgcolor={"primary.main"}>
                 <HeaderBar/>
             </Box>
@@ -46,29 +34,32 @@ function Home(props) {
                 >
                     <Grid item xs={3}>
                         <Box p={3} >
-                            <BettingCard {...props} image={Arlo} betInput={betInput} setBetInput={setBetInput}/>
+                            <BettingCard {...props} image={Arlo} name='arlo' betInput={betInput} setBetInput={setBetInput}/>
                         </Box>
                     </Grid>
                     <Grid item xs={3}>
                         <Box p={3}>
-                            <BettingCard {...props} image={Maizee} betInput={betInput} setBetInput={setBetInput}/>
+                            <BettingCard {...props} image={Maizee} name='maizee' betInput={betInput} setBetInput={setBetInput}/>
                         </Box>
                     </Grid>
                     <Grid item xs={3}>
                         <Box p={3}>
-                            <BettingCard {...props} image={Tim} betInput={betInput} setBetInput={setBetInput}/>
+                            <BettingCard {...props} image={Tim} name='tim' betInput={betInput} setBetInput={setBetInput}/>
                         </Box>
                     </Grid>
                     <Grid item xs={3}>
                         <Box p={3}>
-                            <BettingCard {...props} image={Razmataz} betInput={betInput} setBetInput={setBetInput}/>
+                            <BettingCard {...props} image={Razmataz} name='razmataz' betInput={betInput} setBetInput={setBetInput}/>
                         </Box>
                     </Grid>
                 </Grid>
-                {betInput ? <BetModel {...props} value={value} setValue={setValue}/> : null}
-                <Box pl={2}>
-                    <Typography variant='h5'>Total Election Value: </Typography>
-                </Box>
+                {betInput ? <BetInputBox {...props} value={value} setValue={setValue}/> : null}
+                <Row>
+                    <Box pl={2}>
+                        <Typography>Total Election Value: </Typography>
+                    </Box>
+                    <SubmitButton/>
+                </Row>
             </Box>
         </>
     )
@@ -76,47 +67,43 @@ function Home(props) {
 
 function HeaderBar() {
     return (
-        <Grid container direction="column" justify="center">
-            <Box p={4}>
-                <Typography variant='h2' align='center' >
-                    Put Your Money Where Your Vote Is
-                </Typography>
+        <>
+            <Grid container direction="column" justify="center">
+                <Box p={4}>
+                    <Typography variant='h2' align='center' >
+                        Put Your Money Where Your Vote Is
+                    </Typography>
+                </Box>
+                <Box p={4}>
+                    <Typography variant='h5' align='center'>
+                        Please select which candidate you would like to vote for and place your bet.
+                    </Typography>
+                </Box>
+            </Grid>
+            <Box pr={5} pl={5} pt={2}>
+                <CountdownTimer  count={5432} border showTitle size={12} responsive hideDay direction='right'/>
             </Box>
-            <Box p={4}>
-                <Typography variant='h5' align='center'>
-                    Please select which candidate you would like to vote for a place your bet.
-                </Typography>
-            </Box>
-        </Grid>
+        </>
+
     )
 }
 
-function BetModel(props) {
-    const classes = useStyles();
-    const handleChange = (prop) => (event) => {
-        props.setValue({ ...props.value, [prop]: event.target.value });
-    };
 
+function SubmitButton() {
+    const classes = useStyles();
     return (
-        <div className={classes.root}>
-            <Grid container
-                  spacing={3}
-                  justify="center"
-            >
-                <Box pt={2} pb={4}>
-                    <FormControl fullWidth className={classes.margin} variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-amount">Bet Amount</InputLabel>
-                        <OutlinedInput
-                            id="outlined-adornment-amount"
-                            value={props.value.amount}
-                            onChange={handleChange('amount')}
-                            startAdornment={<InputAdornment position="start">Ξ</InputAdornment>}
-                            labelWidth={83}
-                        />
-                    </FormControl>
-                </Box>
+        <>
+            <Grid container justify="flex-end">
+                <Button
+                    variant="contained"
+                    style={{backgroundColor: '#488DB7'}}
+                    className={classes.button}
+                    endIcon={<HowToVoteIcon/>}
+                >
+                    Submit
+                </Button>
             </Grid>
-        </div>
+        </>
     )
 }
 

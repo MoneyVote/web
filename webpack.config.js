@@ -32,7 +32,7 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({ template: "app/src/Components/Static/index.html", favicon: "app/src/Components/Static/favicon.ico", title: 'Money Vote'}),
+        new HtmlWebpackPlugin({ template: "app/src/Components/Static/index.html", favicon: "app/src/Components/Static/Images/favicon.ico", title: 'Money Vote'}),
         new webpack.HotModuleReplacementPlugin()
     ],
     output: { filename: "bundle.js", path: path.join(__dirname, outputDirectory) },
