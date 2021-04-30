@@ -15,12 +15,13 @@ import BetInputBox from '../Components/BetInputBox';
 import CountdownTimer from "../Components/CountdownTimer";
 
 function Home(props) {
+    console.log("Home",props)
     const [betInput, setBetInput] = useState(false);
     const [value, setValue] = useState({amount: ''});
     return (
         <>
-            <Header/>
-            <Box minHeight={325} display={"flex"} flexDirection={"column"} bgcolor={"primary.main"}>
+        <Header {...props}/>
+            <Box minHeight={400} display={"flex"} flexDirection={"column"} bgcolor={"primary.main"}>
                 <HeaderBar/>
             </Box>
             <Box border={1} m={2}>
