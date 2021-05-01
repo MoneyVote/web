@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Box, FormControl, Grid, InputAdornment, InputLabel, makeStyles, OutlinedInput, Typography} from "@material-ui/core";
+import {Box, Grid, Typography} from "@material-ui/core";
 import Header from "../Margins/Header";
 import BettingCard from "../Components/BettingCard";
 import Arlo from "../Static/Images/arlo.jpg";
@@ -11,18 +11,29 @@ import Button from "@material-ui/core/Button";
 import {Row} from "@mui-treasury/components/flex";
 import {useStyles} from "../Static/Constants";
 import BetInputBox from '../Components/BetInputBox';
-
-import CountdownTimer from "../Components/CountdownTimer";
+import Results from './Results'
+import HeaderBar from "../Components/HeaderBar";
 
 function Home(props) {
-    console.log("Home",props)
-    const [betInput, setBetInput] = useState(false);
-    const [value, setValue] = useState({amount: ''});
+    const [step, setStep] = useState(1);
+    const [candidateSelected, setCandidateSelected] = useState(false);
+
+    if (step === 0) {
+        return <Betting {...props} step={step} candidateSelected={candidateSelected} setCandidateSelected={setCandidateSelected}/>
+    }
+    else {
+        return <Results {...props} step={step} setCandidateSelected={setCandidateSelected}/>
+    }
+
+}
+
+function Betting(props) {
+
     return (
         <>
-        <Header {...props}/>
+            <Header {...props}/>
             <Box minHeight={400} display={"flex"} flexDirection={"column"} bgcolor={"primary.main"}>
-                <HeaderBar/>
+                <HeaderBar {...props} step={props.step}/>
             </Box>
             <Box border={1} m={2}>
                 <Box pt={2} pl={2}>
@@ -34,26 +45,33 @@ function Home(props) {
                 >
                     <Grid item xs={3}>
                         <Box p={3} >
-                            <BettingCard {...props} image={Arlo} name='arlo' betInput={betInput} setBetInput={setBetInput}/>
+                            <BettingCard {...props} image={Arlo} name='arlo' setCandidateSelected={props.setCandidateSelected}/>
                         </Box>
                     </Grid>
                     <Grid item xs={3}>
                         <Box p={3}>
-                            <BettingCard {...props} image={Maizee} name='maizee' betInput={betInput} setBetInput={setBetInput}/>
+                            <BettingCard {...props} image={Maizee} name='maizee' setCandidateSelected={props.setCandidateSelected}/>
                         </Box>
                     </Grid>
                     <Grid item xs={3}>
                         <Box p={3}>
-                            <BettingCard {...props} image={Tim} name='tim' betInput={betInput} setBetInput={setBetInput}/>
+                            <BettingCard {...props} image={Tim} name='tim' setCandidateSelected={props.setCandidateSelected}/>
                         </Box>
                     </Grid>
                     <Grid item xs={3}>
                         <Box p={3}>
-                            <BettingCard {...props} image={Razmataz} name='razmataz' betInput={betInput} setBetInput={setBetInput}/>
+                            <BettingCard {...props} image={Razmataz} name='razmataz' setCandidateSelected={props.setCandidateSelected}/>
                         </Box>
                     </Grid>
                 </Grid>
-                {betInput ? <BetInputBox {...props} value={value} setValue={setValue}/> : null}
+                {props.candidateSelected ?
+                    <Grid container
+                          justify="center"
+                    >
+                        <Typography>Bet Amount: </Typography>
+                    </Grid>
+                    : null
+                }
                 <Row>
                     <Box pl={2}>
                         <Typography>Total Election Value: </Typography>
@@ -62,29 +80,6 @@ function Home(props) {
                 </Row>
             </Box>
         </>
-    )
-}
-
-function HeaderBar() {
-    return (
-        <>
-            <Grid container direction="column" justify="center">
-                <Box p={4}>
-                    <Typography variant='h2' align='center' >
-                        Put Your Money Where Your Vote Is
-                    </Typography>
-                </Box>
-                <Box p={4}>
-                    <Typography variant='h5' align='center'>
-                        Please select which candidate you would like to vote for and place your bet.
-                    </Typography>
-                </Box>
-            </Grid>
-            <Box pr={5} pl={5} pt={2}>
-                <CountdownTimer  count={5432} border showTitle size={12} responsive hideDay direction='right'/>
-            </Box>
-        </>
-
     )
 }
 
