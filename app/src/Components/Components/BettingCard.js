@@ -7,7 +7,7 @@ function BettingCard(props) {
 
     return (
         <Card>
-            <CardActionArea onClick={() => props.setBetInput(true)}>
+            <CardActionArea onClick={() => props.setCandidateSelected(true)}>
                 <CardMedia
                     className={classes.media}
                     image={props.image}
