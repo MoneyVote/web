@@ -17,18 +17,19 @@ import HeaderBar from "../Components/HeaderBar";
 function Home(props) {
     const [step, setStep] = useState(1);
     const [candidateSelected, setCandidateSelected] = useState(false);
+    const [winner, setWinner] = useState(false);
 
     if (step === 0) {
         return <Betting {...props} step={step} candidateSelected={candidateSelected} setCandidateSelected={setCandidateSelected}/>
     }
     else {
-        return <Results {...props} step={step} setCandidateSelected={setCandidateSelected}/>
+        return <Results {...props} step={step} winner={winner} setCandidateSelected={setCandidateSelected}/>
     }
 
 }
 
 function Betting(props) {
-
+    const [name, setName] = useState();
     return (
         <>
             <Header {...props}/>
@@ -45,22 +46,22 @@ function Betting(props) {
                 >
                     <Grid item xs={3}>
                         <Box p={3} >
-                            <BettingCard {...props} image={Arlo} name='arlo' setCandidateSelected={props.setCandidateSelected}/>
+                            <BettingCard {...props} image={Arlo} setName={setName} name='arlo' setCandidateSelected={props.setCandidateSelected}/>
                         </Box>
                     </Grid>
                     <Grid item xs={3}>
                         <Box p={3}>
-                            <BettingCard {...props} image={Maizee} name='maizee' setCandidateSelected={props.setCandidateSelected}/>
+                            <BettingCard {...props} image={Maizee} setName={setName} name='maizee' setCandidateSelected={props.setCandidateSelected}/>
                         </Box>
                     </Grid>
                     <Grid item xs={3}>
                         <Box p={3}>
-                            <BettingCard {...props} image={Tim} name='tim' setCandidateSelected={props.setCandidateSelected}/>
+                            <BettingCard {...props} image={Tim} setName={setName} name='tim' setCandidateSelected={props.setCandidateSelected}/>
                         </Box>
                     </Grid>
                     <Grid item xs={3}>
                         <Box p={3}>
-                            <BettingCard {...props} image={Razmataz} name='razmataz' setCandidateSelected={props.setCandidateSelected}/>
+                            <BettingCard {...props} image={Razmataz} setName={setName} name='razmataz' setCandidateSelected={props.setCandidateSelected}/>
                         </Box>
                     </Grid>
                 </Grid>
@@ -76,7 +77,7 @@ function Betting(props) {
                     <Box pl={2}>
                         <Typography>Total Election Value: </Typography>
                     </Box>
-                    <SubmitButton/>
+                    <SubmitButton name={name}/>
                 </Row>
             </Box>
         </>
@@ -84,7 +85,7 @@ function Betting(props) {
 }
 
 
-function SubmitButton() {
+function SubmitButton(props) {
     const classes = useStyles();
     return (
         <>
@@ -94,12 +95,17 @@ function SubmitButton() {
                     style={{backgroundColor: '#488DB7'}}
                     className={classes.button}
                     endIcon={<HowToVoteIcon/>}
+                    onClick={() => sendCandidate(props.name)}
                 >
                     Submit
                 </Button>
             </Grid>
         </>
     )
+}
+
+function sendCandidate(name) {
+
 }
 
 
